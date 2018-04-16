@@ -18,8 +18,19 @@ def postentry():
     name = request.form["name"]
     message = request.form["message"]
     model.add_entry(name, message)
-    return redirect("/")
+    return redirect("/admin")
+
+@app.route("/admin")
+def admin():
+    return render_template("admin.html",entries = model.get_entries())
+
+@app.route("/delete",methods = ["POST"])
+def delentry():
+    p_id = request.form['theid']
+    model.delete_entry(p_id)
+    return redirect("/admin")
+    
 
 if __name__=="__main__":
-    model.init()
+    model.init(app)
     app.run(debug=True)
