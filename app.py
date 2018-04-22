@@ -24,7 +24,7 @@ def postentry():
 def admin():
     return render_template("admin.html",entries = model.get_entries())
 
-@app.route("/delete",methods = ["POST"])
+@app.route("/delete",methods=["POST"])
 def delentry():
     p_id = request.form['theid']
     model.delete_entry(p_id)
